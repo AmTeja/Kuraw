@@ -46,11 +46,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     try {
       if (state.status == FeedStatus.initial) {
         final posts = await _postRepository.fetchPosts();
-        return emit(state.copyWith(
-          status: FeedStatus.success,
-          posts: posts,
-          hasReachedMax: false,
-        ));
+        return emit(
+          state.copyWith(
+            status: FeedStatus.success,
+            posts: posts,
+            hasReachedMax: false,
+          ),
+        );
       }
 
       final posts = await _postRepository.fetchPosts(state.posts.length);

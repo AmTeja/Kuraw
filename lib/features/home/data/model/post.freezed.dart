@@ -25,7 +25,7 @@ mixin _$Post {
   String get content => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -45,11 +45,11 @@ abstract class $PostCopyWith<$Res> {
       String content,
       String userId,
       String image,
-      User user,
+      User? user,
       DateTime createdAt,
       DateTime updatedAt});
 
-  $UserCopyWith<$Res> get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? content = null,
     Object? userId = null,
     Object? image = null,
-    Object? user = null,
+    Object? user = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -95,10 +95,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -112,8 +112,12 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -132,12 +136,12 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       String content,
       String userId,
       String image,
-      User user,
+      User? user,
       DateTime createdAt,
       DateTime updatedAt});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -155,7 +159,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? content = null,
     Object? userId = null,
     Object? image = null,
-    Object? user = null,
+    Object? user = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -180,10 +184,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -205,7 +209,7 @@ class _$PostImpl implements _Post {
       required this.content,
       required this.userId,
       required this.image,
-      required this.user,
+      this.user,
       required this.createdAt,
       required this.updatedAt});
 
@@ -223,7 +227,7 @@ class _$PostImpl implements _Post {
   @override
   final String image;
   @override
-  final User user;
+  final User? user;
   @override
   final DateTime createdAt;
   @override
@@ -277,7 +281,7 @@ abstract class _Post implements Post {
       required final String content,
       required final String userId,
       required final String image,
-      required final User user,
+      final User? user,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$PostImpl;
 
@@ -294,7 +298,7 @@ abstract class _Post implements Post {
   @override
   String get image;
   @override
-  User get user;
+  User? get user;
   @override
   DateTime get createdAt;
   @override

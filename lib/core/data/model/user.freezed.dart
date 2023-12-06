@@ -26,6 +26,7 @@ mixin _$User {
   String get bio => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
   String get profileName => throw _privateConstructorUsedError;
+  List<Post> get posts => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $UserCopyWith<$Res> {
       String bio,
       String profilePicture,
       String profileName,
+      List<Post> posts,
       DateTime? createdAt,
       DateTime? updatedAt});
 }
@@ -69,6 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? bio = null,
     Object? profilePicture = null,
     Object? profileName = null,
+    Object? posts = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -97,6 +100,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.profileName
           : profileName // ignore: cast_nullable_to_non_nullable
               as String,
+      posts: null == posts
+          ? _value.posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -123,6 +130,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String bio,
       String profilePicture,
       String profileName,
+      List<Post> posts,
       DateTime? createdAt,
       DateTime? updatedAt});
 }
@@ -143,6 +151,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? bio = null,
     Object? profilePicture = null,
     Object? profileName = null,
+    Object? posts = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -171,6 +180,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.profileName
           : profileName // ignore: cast_nullable_to_non_nullable
               as String,
+      posts: null == posts
+          ? _value._posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -193,8 +206,10 @@ class _$UserImpl implements _User {
       required this.bio,
       required this.profilePicture,
       required this.profileName,
+      required final List<Post> posts,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt})
+      : _posts = posts;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -211,6 +226,14 @@ class _$UserImpl implements _User {
   final String profilePicture;
   @override
   final String profileName;
+  final List<Post> _posts;
+  @override
+  List<Post> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_posts);
+  }
+
   @override
   final DateTime? createdAt;
   @override
@@ -218,7 +241,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, bio: $bio, profilePicture: $profilePicture, profileName: $profileName, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, username: $username, email: $email, bio: $bio, profilePicture: $profilePicture, profileName: $profileName, posts: $posts, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -235,6 +258,7 @@ class _$UserImpl implements _User {
                 other.profilePicture == profilePicture) &&
             (identical(other.profileName, profileName) ||
                 other.profileName == profileName) &&
+            const DeepCollectionEquality().equals(other._posts, _posts) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -243,8 +267,17 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username, email, bio,
-      profilePicture, profileName, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      username,
+      email,
+      bio,
+      profilePicture,
+      profileName,
+      const DeepCollectionEquality().hash(_posts),
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -268,6 +301,7 @@ abstract class _User implements User {
       required final String bio,
       required final String profilePicture,
       required final String profileName,
+      required final List<Post> posts,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$UserImpl;
 
@@ -285,6 +319,8 @@ abstract class _User implements User {
   String get profilePicture;
   @override
   String get profileName;
+  @override
+  List<Post> get posts;
   @override
   DateTime? get createdAt;
   @override

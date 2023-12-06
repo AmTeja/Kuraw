@@ -10,6 +10,7 @@ import 'package:kuraw/features/auth/presentation/screens/login_page.dart';
 import 'package:kuraw/features/home/bloc/feed_bloc.dart';
 import 'package:kuraw/features/home/data/repository/post_repository.dart';
 import 'package:kuraw/features/home/presentation/screens/home_page.dart';
+import 'package:kuraw/features/profile/data/repository/profile_repository.dart';
 import 'package:kuraw/features/splash/presentation/screens/splash_page.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
@@ -24,6 +25,7 @@ class _AppState extends State<App> {
   late final AuthRepo _authenticationRepository;
   late final UserRepository _userRepository;
   late final PostRepository _postRepository;
+  late final ProfileRepository _profileRepository;
   late final HttpClient _dio;
   late final FlutterSecureStorage _storage;
 
@@ -34,6 +36,7 @@ class _AppState extends State<App> {
     _authenticationRepository = AuthRepo(_dio, _storage);
     _userRepository = UserRepository(_dio);
     _postRepository = PostRepository(_dio);
+    _profileRepository = ProfileRepository(_dio);
     super.initState();
   }
 
@@ -44,6 +47,7 @@ class _AppState extends State<App> {
         RepositoryProvider.value(value: _authenticationRepository),
         RepositoryProvider.value(value: _userRepository),
         RepositoryProvider.value(value: _postRepository),
+        RepositoryProvider.value(value: _profileRepository),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -76,7 +80,7 @@ class _AppViewState extends State<AppView> {
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
-  var showedSplash = false;
+  var splashShown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +99,8 @@ class _AppViewState extends State<AppView> {
             future: Future.delayed(const Duration(seconds: 1)),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                if (showedSplash) return child!;
-                showedSplash = true;
-
+                if (splashShown) return child!;
+                splashShown = true;
                 return const SplashPage();
               }
               return BlocListener<AuthBloc, AuthState>(

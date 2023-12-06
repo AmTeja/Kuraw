@@ -14,6 +14,7 @@ class PostRepository {
       final data = response.data as List;
       return data.map((rawPost) => Post.fromJson(rawPost)).toList();
     } else {
+      final data = response.data as 
       throw Exception('error fetching posts');
     }
   }

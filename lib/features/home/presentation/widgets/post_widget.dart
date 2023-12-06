@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kuraw/core/util/context_extensions.dart';
 import 'package:kuraw/core/widgets/cached_image.dart';
 import 'package:kuraw/features/home/data/model/post.dart';
 import 'package:kuraw/features/home/presentation/widgets/post_interactions_row.dart';
 import 'package:kuraw/features/home/presentation/widgets/post_options.dart';
+import 'package:kuraw/features/profile/presentation/screens/profile_screen.dart';
 
 class PostWidget extends StatelessWidget {
   const PostWidget({super.key, required this.post});
@@ -17,10 +19,15 @@ class PostWidget extends StatelessWidget {
       children: [
         ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(post.user.profilePicture),
+          leading: GestureDetector(
+            onTap: () {
+              context.push(ProfilePage.route(post.user!.id));
+            },
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(post.user!.profilePicture),
+            ),
           ),
-          title: Text(post.user.username, style: textTheme.titleMedium),
+          title: Text(post.user!.username, style: textTheme.titleMedium),
           trailing: PostOptions(post),
         ),
         Padding(

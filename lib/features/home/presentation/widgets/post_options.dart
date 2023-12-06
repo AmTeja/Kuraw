@@ -15,7 +15,7 @@ class PostOptions extends StatelessWidget {
         return PopupMenuButton(
           itemBuilder: (BuildContext context) {
             return [
-              if (post.user.id == state.user?.id) ...[
+              if (post.user!.id == state.user?.id) ...[
                 const PopupMenuItem(
                   value: 'edit',
                   child: Text('Edit'),

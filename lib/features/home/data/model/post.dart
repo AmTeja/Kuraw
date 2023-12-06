@@ -12,7 +12,7 @@ class Post with _$Post {
     required String content,
     required String userId,
     required String image,
-    required User user,
+    User? user,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Post;
